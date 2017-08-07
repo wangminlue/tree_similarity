@@ -1,7 +1,10 @@
 from os import listdir
-import xml.etree.ElementTree as ET
+#import xml.etree.ElementTree as ET
+from lxml import etree
 from GSSTree import exact_gss_tree
 from XMLDistance import zhang_distance
+from RTED import apted_distance
+import xtdiff
 
 def get_clusters(path):
 
@@ -11,7 +14,7 @@ def get_clusters(path):
         fullpath = path + c_dir
         files = listdir(fullpath)
         for xml in files:
-            xml_tree = ET.parse(fullpath + "/" + xml)
+            xml_tree = etree.parse(fullpath + "/" + xml)
             xml_cluster_pairs.append((xml_tree, c_dir))
 
     return xml_cluster_pairs
@@ -33,6 +36,14 @@ def tree_exp(xml_cluster_pairs, method="gss"):
 				sim = zhang_distance(xml1,xml2)
 				matched = (cluster1==cluster2)
 				result_pairs.append((sim,matched))
+			elif method =='apted':
+				sim = apted_distance(xml1,xml2)
+				matched = (cluster1 == cluster2)
+				result_pairs.append((sim,matched))
+			#elif method == 'chawathe':
+			#	sim = len(xtdiff.diff(xml1.getroot(),xml2.getroot()))
+			#	matched = (cluster1 == cluster2)
+			#	result_pairs.append((sim,matched))
 			else:
 				print 'no method found'
 	
@@ -72,7 +83,7 @@ if __name__ == "__main__":
 
     path = './realworld_xml/'
     data = get_clusters(path)
-    pre, recall = tree_exp(data, method='zhang')
+    pre, recall = tree_exp(data, method='apted')
 
     print pre
     print recall
