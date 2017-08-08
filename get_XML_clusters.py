@@ -4,7 +4,7 @@ from lxml import etree
 from GSSTree import exact_gss_tree
 from XMLDistance import zhang_distance
 from RTED import apted_distance
-from XML_CHAWATHE import chawathe_distance
+from chawatheDistance import chawathe_distance
 
 def get_clusters(path):
 
@@ -42,7 +42,7 @@ def tree_exp(xml_cluster_trip, method="gss"):
 				matched = (cluster1 == cluster2)
 				result_pairs.append((sim,matched))
 			elif method == 'chawathe':
-				sim = chawathe_distance(xml1_file, xml2_file)
+				sim = chawathe_distance(xml1, xml2)
 				matched = (cluster1 == cluster2)
 				result_pairs.append((sim,matched))
 			else:
