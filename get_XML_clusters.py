@@ -24,11 +24,14 @@ def get_clusters(path):
 def tree_exp(xml_cluster_trip, method="gss"):
 
     result_pairs = []
-    i = 0
-    for xml1, xml1_file, cluster1 in xml_cluster_trip:
-        for xml2, xml2_file, cluster2 in xml_cluster_trip:
-			print i
-			i += 1
+    n = 0
+    for i in range(len(xml_cluster_trip)):
+        for j in range(i, len(xml_cluster_trip)):
+			xml1, xml1_file, cluster1 = xml_cluster_trip[i]
+			xml2, xml2_file, cluster2 = xml_cluster_trip[j]
+			
+			print n
+			n += 1
 			if method == "gss":
 				sim = exact_gss_tree(xml1, xml2)
 				matched = (cluster1 == cluster2)
