@@ -4,28 +4,29 @@ from lxml import etree
 from GSSTree import exact_gss_tree
 from XMLDistance import zhang_distance
 from RTED import apted_distance
-import xtdiff
+from XML_CHAWATHE import chawathe_distance
 
 def get_clusters(path):
 
-    xml_cluster_pairs = []
+    xml_cluster_trip= []
     clusters_dir = listdir(path)
     for c_dir in clusters_dir:
         fullpath = path + c_dir
         files = listdir(fullpath)
         for xml in files:
-            xml_tree = etree.parse(fullpath + "/" + xml)
-            xml_cluster_pairs.append((xml_tree, c_dir))
+            xml_path = fullpath + "/" + xml
+            xml_tree = etree.parse(xml_path)
+            xml_cluster_trip.append((xml_tree, xml_path, c_dir))
 
-    return xml_cluster_pairs
+    return xml_cluster_trip
 
 
-def tree_exp(xml_cluster_pairs, method="gss"):
+def tree_exp(xml_cluster_trip, method="gss"):
 
     result_pairs = []
     i = 0
-    for xml1, cluster1 in xml_cluster_pairs:
-        for xml2, cluster2 in xml_cluster_pairs:
+    for xml1, xml1_file, cluster1 in xml_cluster_trip:
+        for xml2, xml2_file, cluster2 in xml_cluster_trip:
 			print i
 			i += 1
 			if method == "gss":
@@ -40,10 +41,10 @@ def tree_exp(xml_cluster_pairs, method="gss"):
 				sim = apted_distance(xml1,xml2)
 				matched = (cluster1 == cluster2)
 				result_pairs.append((sim,matched))
-			#elif method == 'chawathe':
-			#	sim = len(xtdiff.diff(xml1.getroot(),xml2.getroot()))
-			#	matched = (cluster1 == cluster2)
-			#	result_pairs.append((sim,matched))
+			elif method == 'chawathe':
+				sim = chawathe_distance(xml1_file, xml2_file)
+				matched = (cluster1 == cluster2)
+				result_pairs.append((sim,matched))
 			else:
 				print 'no method found'
 	
@@ -83,7 +84,7 @@ if __name__ == "__main__":
 
     path = './realworld_xml/'
     data = get_clusters(path)
-    pre, recall = tree_exp(data, method='apted')
+    pre, recall = tree_exp(data, method='chawathe')
 
     print pre
     print recall
