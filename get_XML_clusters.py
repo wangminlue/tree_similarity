@@ -87,7 +87,7 @@ if __name__ == "__main__":
 
     path = './realworld_xml/'
     data = get_clusters(path)
-    pre, recall = tree_exp(data, method='chawathe')
+    pre, recall = tree_exp(data, method='gss')
 
     print pre
     print recall
