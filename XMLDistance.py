@@ -23,9 +23,10 @@ def toString(xml_node):
 def zhang_distance(tree_A, tree_B):
     root_A = tree_A.getroot()
     root_B = tree_B.getroot()
-    exec('tree_A =' + printTree(root_A))
-    exec('tree_B =' + printTree(root_B))
-    d = simple_distance(tree_A, tree_B)
+    local_vars = {}
+    exec('tree_A =' + printTree(root_A), globals(), local_vars)
+    exec('tree_B =' + printTree(root_B), globals(), local_vars)
+    d = simple_distance(local_vars['tree_A'], local_vars['tree_B'])
 
     return d
 
@@ -38,10 +39,11 @@ if __name__ == "__main__":
     xml_B = ET.parse('OrdinaryIssuePage/111.xml')
     root_B = xml_B.getroot()
 
-    exec('tree_A =' + printTree(root_A))
+    local_vars = {}
+    exec('tree_A =' + printTree(root_A), globals(), local_vars)
 
-    exec('tree_B =' + printTree(root_B))
+    exec('tree_B =' + printTree(root_B), globals(), local_vars)
 
-    d = simple_distance(tree_A, tree_B)
+    d = simple_distance(local_vars['tree_A'], local_vars['tree_B'])
 
     print(d)
