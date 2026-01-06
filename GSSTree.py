@@ -199,6 +199,6 @@ if __name__ == "__main__":
 
     sib_M = sibling_matrix(anc_matrix)
 
-    print sib_M
-    print anc_M
+    print(sib_M)
+    print(anc_M)
     # return anc_matrix, sib_M
