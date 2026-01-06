@@ -27,31 +27,31 @@ def tree_exp(xml_cluster_trip, method="gss"):
     n = 0
     for i in range(len(xml_cluster_trip)):
         for j in range(i, len(xml_cluster_trip)):
-			xml1, xml1_file, cluster1 = xml_cluster_trip[i]
-			xml2, xml2_file, cluster2 = xml_cluster_trip[j]
-			
-			print n
-			n += 1
-			if method == "gss":
-				sim = exact_gss_tree(xml1, xml2)
-				matched = (cluster1 == cluster2)
-				result_pairs.append((sim, matched))
-			elif method =='zhang':
-				sim = zhang_distance(xml1,xml2)
-				matched = (cluster1==cluster2)
-				result_pairs.append((sim,matched))
-			elif method =='apted':
-				sim = apted_distance(xml1,xml2)
-				matched = (cluster1 == cluster2)
-				result_pairs.append((sim,matched))
-			elif method == 'chawathe':
-				sim = chawathe_distance(xml1, xml2)
-				matched = (cluster1 == cluster2)
-				result_pairs.append((sim,matched))
-			else:
-				print 'no method found'
-	
-			
+            xml1, xml1_file, cluster1 = xml_cluster_trip[i]
+            xml2, xml2_file, cluster2 = xml_cluster_trip[j]
+            
+            print(n)
+            n += 1
+            if method == "gss":
+                sim = exact_gss_tree(xml1, xml2)
+                matched = (cluster1 == cluster2)
+                result_pairs.append((sim, matched))
+            elif method =='zhang':
+                sim = zhang_distance(xml1,xml2)
+                matched = (cluster1==cluster2)
+                result_pairs.append((sim,matched))
+            elif method =='apted':
+                sim = apted_distance(xml1,xml2)
+                matched = (cluster1 == cluster2)
+                result_pairs.append((sim,matched))
+            elif method == 'chawathe':
+                sim = chawathe_distance(xml1, xml2)
+                matched = (cluster1 == cluster2)
+                result_pairs.append((sim,matched))
+            else:
+                print('no method found')
+    
+            
              
 
     ave_pre, max_fscore = cal_stats(result_pairs)
@@ -89,6 +89,6 @@ if __name__ == "__main__":
     data = get_clusters(path)
     pre, recall = tree_exp(data, method='gss')
 
-    print pre
-    print recall
+    print(pre)
+    print(recall)
     # return anc_matrix, sib_M
