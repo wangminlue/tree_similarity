@@ -13,7 +13,7 @@ def breadth_first(xml_root):
         cur_node = stack[0]
 
         stack = stack[1:]
-        num_right_sib = len(cur_node[0].getchildren())
+        num_right_sib = len(list(cur_node[0]))
         for child in cur_node[0]:
             stack.append((child, num_right_sib))
             num_right_sib -= 1
@@ -199,6 +199,6 @@ if __name__ == "__main__":
 
     sib_M = sibling_matrix(anc_matrix)
 
-    print sib_M
-    print anc_M
+    print(sib_M)
+    print(anc_M)
     # return anc_matrix, sib_M
