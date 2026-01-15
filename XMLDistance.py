@@ -1,4 +1,10 @@
-from zss import simple_distance, Node
+try:
+    from zss import simple_distance, Node
+    ZSS_AVAILABLE = True
+except ImportError:
+    ZSS_AVAILABLE = False
+    simple_distance = None
+    Node = None
 import xml.etree.ElementTree as ET
 
 
@@ -21,6 +27,8 @@ def toString(xml_node):
 
 
 def zhang_distance(tree_A, tree_B):
+    if not ZSS_AVAILABLE:
+        raise ImportError("zss module is required for zhang_distance")
     root_A = tree_A.getroot()
     root_B = tree_B.getroot()
     exec('tree_A =' + printTree(root_A))
@@ -44,4 +52,4 @@ if __name__ == "__main__":
 
     d = simple_distance(tree_A, tree_B)
 
-    print d
+    print(d)
