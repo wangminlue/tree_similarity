@@ -1,3 +1,4 @@
+from __future__ import print_function
 import numpy as np
 import xml.etree.ElementTree as ET
 from collections import deque
@@ -199,6 +200,6 @@ if __name__ == "__main__":
 
     sib_M = sibling_matrix(anc_matrix)
 
-    print sib_M
-    print anc_M
+    print(sib_M)
+    print(anc_M)
     # return anc_matrix, sib_M
