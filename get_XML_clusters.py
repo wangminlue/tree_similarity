@@ -1,3 +1,4 @@
+from __future__ import print_function
 from os import listdir
 #import xml.etree.ElementTree as ET
 from lxml import etree
@@ -30,7 +31,7 @@ def tree_exp(xml_cluster_trip, method="gss"):
             xml1, xml1_file, cluster1 = xml_cluster_trip[i]
             xml2, xml2_file, cluster2 = xml_cluster_trip[j]
             
-            print n
+            print(n)
             n += 1
             if method == "gss":
                 sim = exact_gss_tree(xml1, xml2)
@@ -49,7 +50,7 @@ def tree_exp(xml_cluster_trip, method="gss"):
                 matched = (cluster1 == cluster2)
                 result_pairs.append((sim,matched))
             else:
-                print 'no method found'
+                print('no method found')
 	
 			
              
@@ -89,6 +90,6 @@ if __name__ == "__main__":
     data = get_clusters(path)
     pre, recall = tree_exp(data, method='gss')
 
-    print pre
-    print recall
+    print(pre)
+    print(recall)
     # return anc_matrix, sib_M

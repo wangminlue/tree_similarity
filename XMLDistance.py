@@ -1,3 +1,4 @@
+from __future__ import print_function
 from zss import simple_distance, Node
 import xml.etree.ElementTree as ET
 
@@ -44,4 +45,4 @@ if __name__ == "__main__":
 
     d = simple_distance(tree_A, tree_B)
 
-    print d
+    print(d)
