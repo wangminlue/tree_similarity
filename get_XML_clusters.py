@@ -51,9 +51,6 @@ def tree_exp(xml_cluster_trip, method="gss"):
                 result_pairs.append((sim,matched))
             else:
                 print('no method found')
-	
-			
-             
 
     ave_pre, max_fscore = cal_stats(result_pairs)
 
