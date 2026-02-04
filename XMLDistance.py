@@ -44,4 +44,4 @@ if __name__ == "__main__":
 
     d = simple_distance(tree_A, tree_B)
 
-    print d
+    print(d)
